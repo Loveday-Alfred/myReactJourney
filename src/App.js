@@ -1,23 +1,101 @@
-import './App.css';
-import ExpenseItem from './components/ExpenseItem';
-import NewExpense from './components/NewExpense';
+// import React, { useState } from 'react';
+
+// import AddUser from './component/Users/AddUser';
+// import UsersList from './component/Users/UsersList';
+
+// function App() {
+//   const [usersList, setUsersList] = useState([]);
+
+//   const addUserHandler = (uName, uAge) => {
+//     setUsersList((prevUsersList) => {
+//       return [
+//         ...prevUsersList,
+//         { name: uName, age: uAge, id: Math.random().toString() },
+//       ];
+//     });
+//   };
+
+//   return (
+//     <>
+//       <AddUser onAddUser={addUserHandler} />
+//       <UsersList users={usersList} />
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+
+// import React, { useEffect, useState } from 'react';
+
+// import Login from './components/Login/Login';
+// import Home from './components/Home/Home';
+// import MainHeader from './components/MainHeader/MainHeader';
+
+// function App() {
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+//   useEffect(() => {
+//     const stored = localStorage.getItem('isLoggedIn');
+
+//     if(stored === '1')
+//       setIsLoggedIn(true);
+//   }, []) 
+
+//   const loginHandler = (email, password) => {
+//     // We should of course check email and password
+//     // But it's just a dummy/ demo anyways
+//     localStorage.setItem('isLoggedIn', '1');
+//     setIsLoggedIn(true);
+//   };
+
+//   const logoutHandler = () => {
+//     localStorage.removeItem('isLoggedIn')
+//     setIsLoggedIn(false);
+//   };
+
+//   return (
+//     <React.Fragment>
+//       <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+//       <main>
+//         {!isLoggedIn && <Login onLogin={loginHandler} />}
+//         {isLoggedIn && <Home onLogout={logoutHandler} />}
+//       </main>
+//     </React.Fragment>
+//   );
+// }
+
+// export default App;
+
+
+
+
+import { useState } from "react";
+import Cart from "./components/Cart/Cart";
+import Header from "./components/Layout/Header";
+import Meals from "./components/Meals/Meals";
+import CartProvider from "./store/CartProvider";
 
 const App = () => {
+  const [cartIsShown, setCartIsShown] = useState(false)
 
-  const expenses = [
-    {title: 'Car Insurance', amount: '$645.44', id: 1, date: new Date(2021, 7, 1)},
-    {title: 'Car Services', amount: '$645.44', id: 2, date: new Date(2020, 7, 20)},
-    {title: 'New Desktop', amount: '$645.44', id: 3, date: new Date(2019, 6, 10)},
-  ];
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  };
+
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
 
   return (
-    <div className="App">
-       <h2>React...The Basics</h2>
-       <h3><NewExpense /></h3>
-       <ExpenseItem title={expenses[0].title} amount={expenses[0].amount} date={expenses[0].date} />
-       <ExpenseItem title={expenses[1].title} amount={expenses[1].amount} date={expenses[1].date} />
-       <ExpenseItem title={expenses[2].title} amount={expenses[2].amount} date={expenses[2].date} />
-    </div>
+    <CartProvider>
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      <Header onShowCart={showCartHandler} />
+      <main>
+        <Meals />
+      </main>
+    </CartProvider>
   );
 }
 
