@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+// CONNECTING WITH FIREBASE
 
 const useFetch = () => {
     const [isLoading, setIsLoading] = useState(false);
