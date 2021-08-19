@@ -1,7 +1,7 @@
 const Tag = () => {
     return (
         <div>
-            Tag
+            <h1>Tag</h1>
         </div>
     )
 }

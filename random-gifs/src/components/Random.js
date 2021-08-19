@@ -1,7 +1,9 @@
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 const Random = () => {
     return (
         <div>
-            Random
+            <h1>Random</h1>
         </div>
     )
 }
