@@ -1,8 +1,17 @@
+import { Route, useParams } from "react-router-dom";
+import Comments from '../components/comments/Comments';
+
 const QouteDetail = () => {
+    const params = useParams();
+
     return (
-        <div>
+        <>
             <h1>Qoute Detail</h1>
-        </div>
+            <p>{params.qouteId}</p>
+            <Route path={`/qoutes/${params.qouteId}/comments`}>
+            <Comments />
+            </Route>
+        </>
     )
 }
 
