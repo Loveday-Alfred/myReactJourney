@@ -25,14 +25,14 @@ const QuoteList = (props) => {
   const sortedQoutes = sortQuotes(props.quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
-    history.push('/qoutes?sort=' + (isSortingAscending ? 'desc' : 'asc'));
+    history.push(`${location.pathname}?sort=${(isSortingAscending ? 'desc' : 'asc')}`);
   };
 
   return (
     <Fragment>
-    <diV className={classes.sorting}>
+    <div className={classes.sorting}>
        <button onClick={changeSortingHandler}>Sort {isSortingAscending ? 'Descending' : 'Ascending'}</button>
-    </diV>
+    </div>
       <ul className={classes.list}>
         {sortedQoutes.map((quote) => (
           <QuoteItem
