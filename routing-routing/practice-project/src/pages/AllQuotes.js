@@ -4,8 +4,8 @@ import QuoteList from "../components/quotes/QuoteList";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
 
-import useHttp from '../hooks/use-http';
-import { getAllQuotes } from '../lib/api';
+import useHttp from '../components/hooks/use-http';
+import { getAllQuotes } from '../components/lib/api';
 
 const AllQuotes = () => {
     const { sendRequest, status, data: loadedQuotes, error } = useHttp(

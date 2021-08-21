@@ -5,14 +5,14 @@ import Comments from '../components/comments/Comments';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 
-import useHttp from '../hooks/use-http';
-import { getSingleQuote } from '../lib/api';
+import useHttp from '../components/hooks/use-http';
+import { getSingleQuote } from '../components/lib/api';
 
 const QouteDetail = () => {
     const params = useParams();
     const match = useRouteMatch();
 
-    const { QouteId } = params;
+    const { quoteId } = params;
 
     const { sendRequest, status, data: loadedQuotes, error } = useHttp(
         getSingleQuote,
@@ -20,8 +20,8 @@ const QouteDetail = () => {
     );
 
     useEffect(() => {
-        sendRequest(QouteId)
-    }, [sendRequest, QouteId]);
+        sendRequest(quoteId)
+    }, [sendRequest, quoteId]);
 
     if(status === 'pending') {
         return (
@@ -31,9 +31,11 @@ const QouteDetail = () => {
         )
     }
 
-    if(error) return <p className='centered'>{error}</p>
+    if(error) {
+       return <p className='centered'>{error}</p>
+    }   
 
-    if(!loadedQuotes.text) return <p>No Quote Found</p> 
+    if(!loadedQuotes) return <p>No Quote Found</p> 
 
     return (
         <>
